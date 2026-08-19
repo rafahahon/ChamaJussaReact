@@ -3,12 +3,14 @@ import { Button, ButtonText, Colors, Title, TitleLabel } from "../../constants/t
 import { useRouter } from "expo-router"
 import { useState } from "react";
 import { autenticacaoService } from "../../services/autenticacaoService";
+import { ActivityIndicator } from "react-native";
 
 // export const Login = () => {
 export default function Login() {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -33,10 +35,17 @@ export default function Login() {
     }
 
     try {
+      setLoading(true);
       await autenticacaoService.login({ email: emailDigitado, senha: senhaDigitada })
       router.replace("/listaOs")
-    } catch (error) {
-      Alert.alert("Erro!!!", "E-mail ou senha inválidos.")
+    } catch (error: any) {
+      const mensagem =
+        error?.response?.data?.message ||
+        "E-mail ou senha inválidos. Tente novamente.";
+      // O Alert.alert do React Native exige que a mensagem seja uma string. Se o backend devolver um objeto complexo ou algo que não seja texto puro, o typeof mensagem === "string" impede o aplicativo de quebrar, exibindo "Erro inesperado.".
+      Alert.alert("Erro ao entrar", typeof mensagem === "string" ? mensagem : "Erro inesperado.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -71,10 +80,15 @@ export default function Login() {
           // value={number}
           ></TextInput>
         </View>
-        <TouchableOpacity style={estilos.btnLogin} onPress={acessar}>
+        <TouchableOpacity style={estilos.btnLogin} onPress={acessar} disabled={loading}>
+        {loading ? (
+          <ActivityIndicator color="#FFFFFF" />
+        ) : (
           <Text style={estilos.buttonText}>Acessar o sistema</Text>
-        </TouchableOpacity>
+        )}
+      </TouchableOpacity>
       </View>
+
     </View>
   )
 }

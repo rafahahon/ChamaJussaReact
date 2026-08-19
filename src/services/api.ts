@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Platform } from "react-native";
 
@@ -11,4 +12,17 @@ const enderecoApi = process.env.EXPO_PUBLIC_API || `http://${host}:${porta}`;
 export const api = axios.create({
     baseURL: enderecoApi,
     timeout: 10000
+})
+
+// SOLICITACAO/REQUISICAO -- PRIMEIRO O TOKEN --> OK
+// interceptar/impedir toda requisicao feita pela api (async obrigatorio)
+api.interceptors.request.use(async (config) => {
+    const token = await AsyncStorage.getItem(process.env.EXPO_PUBLIC_TOKEN_KEY);
+
+    if(token) {
+        //configurar o Bearer
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
 })
