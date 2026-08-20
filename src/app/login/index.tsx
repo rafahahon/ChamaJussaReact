@@ -37,7 +37,7 @@ export default function Login() {
     try {
       setLoading(true);
       await autenticacaoService.login({ email: emailDigitado, senha: senhaDigitada })
-      router.replace("/listaOs")
+      router.replace('/listaOs')
     } catch (error: any) {
       const mensagem =
         error?.response?.data?.message ||

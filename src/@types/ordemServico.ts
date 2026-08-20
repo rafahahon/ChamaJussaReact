@@ -1,5 +1,5 @@
 // quais atributos vao aparecer no card
-// LISTAGEM DE OS - para os cards
+// LISTAGEM DE OS - para os cards E tambem para tela de detalhesOs
 export interface OrdemServico {
     osId: number, // importante para redirecionar para detalhesOs
     nomeItem: string,
@@ -7,7 +7,9 @@ export interface OrdemServico {
     dtCriacao: string,
     localizacaoNome: string,
     descricao: string,
+    imagemUrl?: string,
     statusNome: string, 
+    filaNome: string
 }
 
 //     "osId": 0,

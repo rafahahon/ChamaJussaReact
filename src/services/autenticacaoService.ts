@@ -8,7 +8,7 @@ export const autenticacaoService = {
     async login(dados: Login): Promise<LoginResponse> {
 
         // com a {} em data -> ele muda o tipo da constante para LoginResponse e consegue retornar os dados dessa interface
-        const { data } = await api.post<LoginResponse>("/api/Autenticacao/login", dados);
+        const { data } = await api.post<LoginResponse>("Autenticacao/login", dados);
 
         if (data?.token) {
             // pegar o token e salvar no "localstorage" do react native
@@ -22,9 +22,7 @@ export const autenticacaoService = {
         await AsyncStorage.removeItem(process.env.EXPO_PUBLIC_TOKEN_KEY);
     },
 
-    /**
-     * Recupera o token salvo para uso em requisições autenticadas.
-     */
+    // Recupera o token salvo para uso em requisições autenticadas.
     async getToken(): Promise<string | null> {
         return AsyncStorage.getItem(process.env.EXPO_PUBLIC_TOKEN_KEY);
     },

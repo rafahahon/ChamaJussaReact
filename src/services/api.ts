@@ -3,7 +3,7 @@ import axios from "axios";
 import { Platform } from "react-native";
 
 // definindo o host local conforme plataforma(expo, web, ios, etc)
-const host = Platform.OS === "android" ? '10.0.2.2' : 'localhost';
+const host = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
 const porta = process.env.EXPO_PUBLIC_PORTA;
 
 // dessa forma, conseguimos rodar tanto na web quanto no emulador
@@ -21,7 +21,7 @@ api.interceptors.request.use(async (config) => {
 
     if(token) {
         //configurar o Bearer
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = "Bearer " + token;
     }
 
     return config;

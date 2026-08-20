@@ -5,6 +5,7 @@ import Footer from "../../../components/footer/Footer";
 import CardOs from "../../../components/cardOs";
 import { useOrdemServico } from "../../../hooks/useOrdemServico";
 import { OrdemServico } from "../../../@types";
+import { useState } from "react";
 
 // const ordens = [
 //   {
@@ -77,8 +78,18 @@ import { OrdemServico } from "../../../@types";
 
 export default function ListaOs() {
 
+  // filtros
+  const [filtroStatus, setFiltroStatus] = useState<string>('Todos');
+
   const { ordens, loading, error, recarregar } = useOrdemServico();
   const os = useOrdemServico();
+
+  // filtragem local
+  const ordensFiltradas = ordens.filter((os) => {
+    if (filtroStatus === 'Todos') return true;
+    const statusAtual = os.statusNome || '';
+    return statusAtual.toLowerCase().includes(filtroStatus.toLowerCase());
+  });
 
   return (
     <SafeAreaView style={styles.safearea}>
@@ -91,19 +102,21 @@ export default function ListaOs() {
           {/* Use o TouchableOpacity para protótipos rápidos e botões simples onde o efeito padrão de transparência já atende bem.
     Use o Pressable para criar sistemas de design robustos, botões com feedback de cor customizado e componentes que precisam de respostas ao toque mais complexas. */}
         </View>
+        {/* Barra de Filtros */}
         <View style={styles.filtros}>
-          <Pressable style={styles.filterbtn}>
-            <Text style={styles.filterbtntxt}>Todos</Text>
-          </Pressable>
-          <Pressable style={styles.filterbtn}>
-            <Text style={styles.filterbtntxt}>Aberto</Text>
-          </Pressable>
-          <Pressable style={styles.filterbtn}>
-            <Text style={styles.filterbtntxt}>Em Andamento</Text>
-          </Pressable>
-          <Pressable style={styles.filterbtn}>
-            <Text style={styles.filterbtntxt}>Concluídas</Text>
-          </Pressable>
+        //tem que estar igualll ao banco 
+          {['Todos', 'Aberto', 'Em Andamento', 'Concluída', 'Cancelada'].map((status) => (
+            <Pressable
+              key={status}
+              style={[
+                styles.filterbtn,
+                filtroStatus === status && { backgroundColor: '#0052CC' },
+              ]}
+              onPress={() => setFiltroStatus(status)}
+            >
+              <Text style={styles.filterbtntxt}>{status}</Text>
+            </Pressable>
+          ))}
         </View>
         {loading && ordens.length === 0 ? (
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -126,7 +139,8 @@ export default function ListaOs() {
         ) : (
           /* Exibição em FlatList com Pull-to-Refresh */
           <FlatList
-            data={ordens}
+          data={ordensFiltradas}
+            // data={ordens}
             keyExtractor={(item: OrdemServico) => String(item.osId || Math.random())}
             showsVerticalScrollIndicator={false}
             refreshing={loading}
