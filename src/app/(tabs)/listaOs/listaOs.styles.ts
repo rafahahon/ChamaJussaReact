@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 8,
         borderRadius: 8,
-        backgroundColor: Colors.colorBtnBlue,
+        backgroundColor: Colors.colorBtnIndigo,
         // gap: 4,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 8,
         borderRadius: 20,
         borderWidth: 1,
-        backgroundColor: Colors.colorBtnBlue,
+        backgroundColor: Colors.colorBtnIndigo,
         borderColor: Colors.inputBg,
 
     },

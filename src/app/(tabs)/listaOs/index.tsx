@@ -6,6 +6,7 @@ import CardOs from "../../../components/cardOs";
 import { useOrdemServico } from "../../../hooks/useOrdemServico";
 import { OrdemServico } from "../../../@types";
 import { useState } from "react";
+import { useAuth } from "../../../contexts/authContext";
 
 // const ordens = [
 //   {
@@ -84,6 +85,8 @@ export default function ListaOs() {
   const { ordens, loading, error, recarregar } = useOrdemServico();
   const os = useOrdemServico();
 
+  const { usuario } = useAuth();
+
   // filtragem local
   const ordensFiltradas = ordens.filter((os) => {
     if (filtroStatus === 'Todos') return true;
@@ -96,7 +99,8 @@ export default function ListaOs() {
       <View style={styles.container}>
         <View style={styles.superior}>
           <View>
-            <Text style={styles.titulo}>Olá, Késsia</Text>
+                                      {/* Ola, {nome} */}
+            <Text style={styles.titulo}>Olá, {usuario?.nome.split(" ")[0]}</Text>
             <Text style={styles.titulo_lista}>Minhas OSs</Text>
           </View>
           {/* Use o TouchableOpacity para protótipos rápidos e botões simples onde o efeito padrão de transparência já atende bem.
@@ -104,7 +108,7 @@ export default function ListaOs() {
         </View>
         {/* Barra de Filtros */}
         <View style={styles.filtros}>
-        //tem que estar igualll ao banco 
+        {/* tem que estar igualll ao banco  */}
           {['Todos', 'Aberto', 'Em Andamento', 'Concluída', 'Cancelada'].map((status) => (
             <Pressable
               key={status}

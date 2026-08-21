@@ -35,11 +35,17 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 65,
-    backgroundColor: '#E0E0E0',
-    marginBottom: 20,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: "#F4F5F7",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  avatarText: {
+    color: "black",
+    fontSize: 36,
+    fontWeight: "700",
   },
   userName: {
     fontSize: 20,

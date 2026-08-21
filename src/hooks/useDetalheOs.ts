@@ -20,5 +20,18 @@ export function useDetalheOs(id: string) {
         carregarOs();
     }, [])
 
-    return os;
+    const formatarData = (dataStr?: string) => {
+        if (!dataStr) return '';
+            try {
+                const data = new Date(dataStr);
+                return isNaN(data.getTime()) ? dataStr : data.toLocaleString('pt-BR')
+        } catch {
+            return dataStr;
+        }
+    };
+
+    return {
+        os, 
+        dataFormatada: formatarData(os?.dtCriacao)
+    }
 }

@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
   },
   problemImage: {
     width: '100%',
-    height: 160,
+    height: 200,
     borderRadius: 8,
     backgroundColor: '#E0E0E0',
   },
@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
 
 
     borderWidth: 1.5,
-    borderColor: '#0066FF',
+    borderColor: '#1F0954',
     backgroundColor: '#EEF4FF',
     borderRadius: 8,
     paddingVertical: 12,
@@ -104,7 +104,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonText: {
-    color: '#0066FF',
+    color: '#1F0954',
     fontSize: 16,
     fontWeight: 'bold',
   }

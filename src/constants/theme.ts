@@ -3,7 +3,7 @@ export const Colors = {
     corBtnVerde: "#10B981",
     corTextoSecundario: "#7D7D7D",
     inputBorder: '#E5E5E7',
-    colorBtnBlue: '#006FFF',
+    colorBtnIndigo: '#1F0954',
     btn_verde: '#10B981',    // Aquele verde chamativo do seu botão
     inputBg: '#F2F2F4',    // O cinza claro de dentro dos inputs
 }
@@ -32,4 +32,10 @@ export const Button = {
 export const ButtonText = {
     color: "#F3F4F6",
     fontFamily: Fonts.bold,
+}
+
+export const Arrow = {
+    position: 'absolute',
+    left: 20,
+    top: 30
 }
